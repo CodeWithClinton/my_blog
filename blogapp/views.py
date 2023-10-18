@@ -80,4 +80,4 @@ def addComment(request):
         "user": new_comment.user
     }
     
-    return JsonResponse(data, safe=False)
+    return JsonResponse(data, safe=False) 
