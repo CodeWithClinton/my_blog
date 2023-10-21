@@ -90,4 +90,4 @@ class Category(models.Model):
 # ALTER ROLE newuser SET default_transaction_isolation TO 'read committed';
 # ALTER ROLE newuser SET timezone TO 'UTC';
 
-sudo ln -s /etc/nginx/sites-available/my_blog /etc/nginx/sites-enabled
+# sudo ln -s /etc/nginx/sites-available/my_blog /etc/nginx/sites-enabled
