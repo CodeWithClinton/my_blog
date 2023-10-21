@@ -47,6 +47,38 @@ class Category(models.Model):
         return self.name
     
 
+
+
+POSTGRES_DB = config('DB_NAME', default=None)  # database name
+POSTGRES_PASSWORD = config('DB_PASSWORD', default=None)  # database user password
+POSTGRES_USER = config('DB_USERNAME', default=None)  # database username
+POSTGRES_READY = (
+    POSTGRES_DB is not None
+    and POSTGRES_PASSWORD is not None
+    and POSTGRES_USER is not None
+)
+if not POSTGRES_READY:
+     DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+else:
+       DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USERNAME'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': 'localhost',
+        'PORT': '', 
+    }
+}
+
+
+
+
 # create user newuser;
 # create database newdb;
 # alter role newuser with password 'newpassword';
