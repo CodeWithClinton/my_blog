@@ -35,8 +35,8 @@ DEBUG = config('DEBUG', default="True") == 'True'
 # DEBUG = True
 
 
-# ALLOWED_HOSTS = ["161.35.120.232", "127.0.0.1", "localhost"]
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1').split(',')
+ALLOWED_HOSTS = ["146.190.167.129", "127.0.0.1", "localhost"]
+# ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1').split(',')
 
 
 # Application definition
