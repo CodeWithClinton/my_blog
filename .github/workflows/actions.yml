@@ -1,17 +1,50 @@
-name: Access server
-on: push
+name: Deploy on server
+on:
+  push:
+    branches:
+      - main
 jobs:
-  access_server:
-    name: Access server
+  deploy:
+    name: Deploy branch main
     runs-on: ubuntu-latest
     steps:
-      - name: Create a file
+      - name: Checkout and restart the server
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.PRIVATE_KEY }}
-          script: echo hello world > hello.txt
+          script: |
+            su clinton
+            cd /home/clinton/my_blog
+            source venv/bin/activate
+            git config --global user.email "${{ secrets.GIT_EMAIL }}"
+            git config --global user.name "${{ secrets.GIT_USERNAME }}"
+            git pull
+            pip install -r requirements.txt
+            python manage.py makemigrations
+            python manage.py migrate
+            python manage.py collectstatic
+            sudo systemctl restart nginx
+            sudo systemctl restart gunicorn
+
+
+# name: Access server
+# on: push
+# jobs:
+#   access_server:
+#     name: Access server
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Create a file
+#         uses: appleboy/ssh-action@master
+#         with:
+#           host: ${{ secrets.HOST }}
+#           username: ${{ secrets.USERNAME }}
+#           key: ${{ secrets.PRIVATE_KEY }}
+#           script: echo hello world > hello.
+          
+
 
 
 # name: Run tests
