@@ -7,26 +7,26 @@ class BlogappConfig(AppConfig):
 
 
 
-server {
-    listen 80;
-    server_name 146.190.167.129;
+# server {
+#     listen 80;
+#     server_name 146.190.167.129;
 
-    location = /favicon.ico { access_log off; log_not_found off; }
-    location /static/ {
-        root /home/clinton/my_blog;
-    }
+#     location = /favicon.ico { access_log off; log_not_found off; }
+#     location /static/ {
+#         root /home/clinton/my_blog;
+#     }
     
     
-    location /media/ {
-        root /home/clinton/my_blog;
-    }
+#     location /media/ {
+#         root /home/clinton/my_blog;
+#     }
     
 
-    location / {
-        include proxy_params;
-        proxy_pass http://unix:/home/clinton/mysite.sock;
-    }
-}
+#     location / {
+#         include proxy_params;
+#         proxy_pass http://unix:/home/clinton/mysite.sock;
+#     }
+# }
 
 
 
